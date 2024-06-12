@@ -1,0 +1,47 @@
+<%- include('./partials/header') -%>
+<div class="background"></div>
+<main>
+<%- include('./partials/navbar') -%>
+
+<!-- Begin Page Content -->
+    <div class="container">
+        <h1>Add Friends</h1>
+        <form id="preferences-form" action="/friends" method="POST">            
+            <label for="username">Enter friend's username:</label>
+            <input type="text" id="username" name="username">
+            <% if (typeof errmsg !== "undefined") { %>
+                <p class="error"><%= errmsg %></p>
+            <% } %>
+            <% if (typeof success !== "undefined") { %>
+                <p class="success"><%= success %></p>
+            <% } %>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+
+    <div class="friends-container">
+        <div>
+            <h2 class="friends-list">Your Friends List</h2>
+            <div class="friends-list-details">
+                <% friends.forEach((friend, index)=>{ %> 
+                    <div style="margin-bottom: 5px;">
+                        <div class="details-div">
+                            <div class="friend-number">
+                                <div 
+                                class="number-avatar"
+                                >
+                                    <%= index + 1 %>
+                                </div>
+                            </div>
+                            <%- include('./partials/friendDetails', {friend: friend})  -%>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<%- include('./partials/footer') -%> 

@@ -1,0 +1,101 @@
+<%- include('./partials/header') -%>
+<div class="background"></div>
+<main>
+<%- include('./partials/navbar') -%>
+
+<!-- Begin Page Content -->
+
+    <div class="user-profile">
+        <div class="profile-img">
+            <div class="big-friends-avatar"><%= user.username[0].toUpperCase() %></div>
+        </div>
+        <div class="profile-info">
+            <h2>Friend Profile</h2>
+            <p>Username: <%= user.username %></p>
+            <p>Email: <%= user.email %></p>
+            <p>Friends: <span class="bold-number"><%= user.friends.length %></span></p>
+            <% if (user.friends.length > 0) { %>
+                <div class="friends-container" style="margin:0">
+                    <div class="friends-list-details">
+                        <% user.friends.forEach((friend, index)=>{ %> 
+                            <div style="margin-bottom: 5px;">
+                                <div class="details-div">
+                                    <div class="friend-number">
+                                        <div 
+                                        class="number-avatar"
+                                        >
+                                            <%= index + 1 %>
+                                        </div>
+                                    </div>
+                                    <%- include('./partials/friendDetails', {friend: friend})  -%>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            <% } %>
+            <p>Books in yet to read in wishlist: <span class="bold-number"><%= user.reading_wishlist.length %></span></p>
+            <% if (user.reading_wishlist.length > 0) { %>
+                <div class="read-container" style="margin:0">
+                    <div class="reading-list-details-1">
+                        <% user.reading_wishlist.slice().reverse().forEach((book, index)=>{ %> 
+                            <div style="margin-bottom: 5px;">
+                                <a 
+                                    href="/friends/<%= user.username %>/books/<%= book.title %>" 
+                                    style="text-decoration: none !important;"
+                                >
+                                    <div class="details-div">
+                                        <p class="book-number"><%= index + 1 %></p>
+                                        <%- include('./partials/bookDetails', {book: book})  -%>
+                                    </div>
+                                </a>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            <% } %>
+            <p>Ongoing Books: <span class="bold-number"><%= user.ongoing.length %></span></p>
+            <% if (user.ongoing.length > 0) { %>
+                <div class="read-container" style="margin:0">
+                    <div class="reading-list-details-1">
+                        <% user.ongoing.slice().reverse().forEach((book, index)=>{ %> 
+                            <div style="margin-bottom: 5px;">
+                                <a 
+                                    href="/friends/<%= user.username %>/books/<%= book.title %>" 
+                                    style="text-decoration: none !important;"
+                                >
+                                    <div class="details-div">
+                                        <p class="book-number"><%= index + 1 %></p>
+                                        <%- include('./partials/bookDetails', {book: book})  -%>
+                                    </div>
+                                </a>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            <% } %>
+            <p>Books Completed Reading: <span class="bold-number"><%= user.completed.length %></span></p>
+            <% if (user.completed.length > 0) { %>
+                <div class="read-container" style="margin:0">
+                    <div class="reading-list-details-1">
+                        <% user.completed.slice().reverse().forEach((book, index)=>{ %> 
+                            <div style="margin-bottom: 5px;">
+                                <a 
+                                    href="/friends/<%= user.username %>/books/<%= book.title %>" 
+                                    style="text-decoration: none !important;"
+                                >
+                                    <div class="details-div">
+                                        <p class="book-number"><%= index + 1 %></p>
+                                        <%- include('./partials/bookDetails', {book: book})  -%>
+                                    </div>
+                                </a>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+</main>
+<%- include('./partials/footer') -%> 

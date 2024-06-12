@@ -1,0 +1,26 @@
+<!-- <div class="container">
+    <h1>Book Recommendation</h1>
+    <form id="preferences-form">
+        <label for="genre">Select your favorite genre:</label>
+        <select id="genre" name="genre">
+            <option value="fantasy">Fantasy</option>
+            <option value="science-fiction">Science Fiction</option>
+            <option value="mystery">Mystery</option>
+            <option value="romance">Romance</option>
+        </select>
+        <label for="author">Enter your favorite author:</label>
+        <input type="text" id="author" name="author" placeholder="e.g., J.K. Rowling">
+        <input type="submit" value="Get Recommendations">
+    </form>
+</div> -->
+
+<div class="container">
+    <h1>Book Recommender</h1>
+    <form id="preferences-form" action="/data" method="POST">            
+        <label for="searchInput">Enter a book title:</label>
+        <input type="text" id="searchInput" name="title">
+        <div id="searchDropdown" style="margin-top: 10px; max-height: 300px; overflow-y: auto;">
+        </div>
+        <input type="submit" value="Get Recommendations">
+    </form>
+</div>

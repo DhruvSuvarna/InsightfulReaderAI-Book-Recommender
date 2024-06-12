@@ -1,0 +1,23 @@
+<%- include('./partials/header') -%>
+<div class="background"></div>
+<main>
+<%- include('./partials/navbar') -%>
+
+<!-- Begin Page Content -->
+    <%- include('./partials/preferenceForm') -%>
+    <% if (typeof books !== "undefined") { %>
+        <h1>Recommendations</h1>
+        <% if (books.length > 0) { %>
+            <h5 style="margin-left: 100px;"><%= books.length %> Results found</h5>
+        <%  } else { %> 
+            <h5 style="margin-left: 100px;">No results found</h5>
+        <% } %>
+        <div class="book-recommendations">
+            <% books.forEach((book)=>{ %> 
+                <%- include('./partials/imageCard', {book: book})  -%>
+            <% }) %>
+        </div>
+    <% } %>
+
+</main>
+<%- include('./partials/footer') -%> 

@@ -1,0 +1,95 @@
+<%- include('./partials/header') -%>
+<%- include('./partials/navbar') -%>
+
+<!-- Begin Page Content -->
+<div class="background"></div>
+<div class="read-container">
+    <div>
+        <h2 class="reading-wishlist">Reading-Wishlist</h2>
+        <div class="line-between"></div>
+        <%- include('./partials/buttonStack', {id: "0"}) -%>
+    </div>
+    <div class="reading-list-0 invisible">
+        <% reading_wishlist.slice().reverse().forEach((book)=>{ %> 
+            <%- include('./partials/bookCover', {book: book})  -%>
+        <% }) %>
+    </div>
+    <div class="reading-list-details-0">
+        <% reading_wishlist.slice().reverse().forEach((book, index)=>{ %> 
+            <div style="margin-bottom: 5px;">
+                <div class="details-div bb_none">
+                    <p class="book-number"><%= index + 1 %></p>
+                    <%- include('./partials/bookDetails', {book: book})  -%>
+                </div>
+                <div class="details-btn-div">
+                <form action="/add-book-to-ongoing" method="POST" style="margin:0;">
+                    <input type="hidden" name="title" value="<%= book.title %>">
+                    <input type="hidden" name="author" value="<%= book.author %>">
+                    <input type="hidden" name="url" value="<%= book.url %>">
+                    <input type="hidden" name="rating" value="<%= book.rating %>">
+                    <input type="hidden" name="genres" value="<%= book.genres %>">
+                    <input type="hidden" name="description" value="<%= book.description %>">
+                    <button class="details-btn">Add to Ongoing list</button>
+                </form>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+<div class="read-container">
+    <div>
+        <h2 class="ongoing-reads">Ongoing</h2>
+        <div class="line-between"></div>
+        <%- include('./partials/buttonStack', {id: "1"}) -%>
+    </div>
+    <div class="reading-list-1 invisible">
+        <% ongoing.slice().reverse().forEach((book)=>{ %> 
+            <%- include('./partials/bookCover', {book: book})  -%>
+        <% }) %>
+    </div>
+    <div class="reading-list-details-1">
+        <% ongoing.slice().reverse().forEach((book, index)=>{ %> 
+            <div style="margin-bottom: 5px;">
+                <div class="details-div bb_none">
+                    <p class="book-number"><%= index + 1 %></p>
+                    <%- include('./partials/bookDetails', {book: book})  -%>
+                </div>
+                <div class="details-btn-div">
+                <form action="/add-book-to-completed" method="POST" style="margin:0;">
+                    <input type="hidden" name="title" value="<%= book.title %>">
+                    <input type="hidden" name="author" value="<%= book.author %>">
+                    <input type="hidden" name="url" value="<%= book.url %>">
+                    <input type="hidden" name="rating" value="<%= book.rating %>">
+                    <input type="hidden" name="genres" value="<%= book.genres %>">
+                    <input type="hidden" name="description" value="<%= book.description %>">
+                    <button class="details-btn">Add to Completed list</button>
+                </form>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+<div class="read-container">
+    <div>
+        <h2 class="completed-reads">Completed</h2>
+        <div class="line-between"></div>
+        <%- include('./partials/buttonStack', {id: "2"}) -%>
+    </div>
+    <div class="reading-list-2 invisible">
+        <% completed.slice().reverse().forEach((book)=>{ %> 
+            <%- include('./partials/bookCover', {book: book})  -%>
+        <% }) %>
+    </div>
+    <div class="reading-list-details-2">
+        <% completed.slice().reverse().forEach((book, index)=>{ %> 
+            <div style="margin-bottom: 5px;">
+                <div class="details-div">
+                    <p class="book-number"><%= index + 1 %></p>
+                    <%- include('./partials/bookDetails', {book: book})  -%>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include('./partials/footer') -%> 

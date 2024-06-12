@@ -1,0 +1,172 @@
+{
+  "states": {
+    "mode": "dark",
+    "isAuthenticated": "false",
+    "username": "null",
+    "test_list": [
+      {
+        "author": "J.G.Ballard",
+        "description": "The classic award-winning novel made famous by Steven \"Spielbergs\" film tells of a young \"boys\" struggle to survive World War II in China.Jim is separated from his parents in a world at war. To survive he must find a deep strength greater than all the events that surround him.Shanghai 1941 — a city aflame from the fateful torch of Pearl Harbor. In streets full of chaos and corpses a young British boy searches in vain for his parents. Imprisoned in a Japanese concentration camp he is witness to the fierce white flash of Nagasaki as the bomb bellows the end of the war...and the dawn of a blighted \"world.Ballards\" enduring novel of war and deprivation internment camps and death marches and starvation and survival is an honest coming-of-age tale set in a world thrown utterly out of joint.",
+        "genres": [
+          "Fiction",
+          "HistoricalFiction",
+          "War",
+          "China",
+          "Historical",
+          "Classics",
+          "WorldWarII"
+        ],
+        "rating": "3.98",
+        "title": "Empire of the Sun",
+        "url": "https://covers.openlibrary.org/b/isbn/156849663X-M.jpg"
+      },
+      {
+        "author": "IrwinShaw",
+        "description": "Traces the fortunes of a first generation German-American family who pursue their dreams in a post-World War II United States",
+        "genres": [
+          "Fiction",
+          "Classics",
+          "HistoricalFiction",
+          "Drama",
+          "Novels",
+          "American",
+          "Contemporary"
+        ],
+        "rating": "4.18",
+        "title": "Rich Man, Poor Man",
+        "url": "https://covers.openlibrary.org/b/isbn/0385288581-M.jpg"
+      },
+      {
+        "author": "JerzyKosiński",
+        "description": "A harrowing story that follows the wanderings of a boy abandoned by his parents during World War II The Painted Bird is a dark novel that examines the proximity of terror and savagery to innocence and love.",
+        "genres": [
+          "Fiction",
+          "HistoricalFiction",
+          "Classics",
+          "War",
+          "Horror",
+          "Literature",
+          "Holocaust"
+        ],
+        "rating": "3.91",
+        "title": "The Painted Bird",
+        "url": "https://covers.openlibrary.org/b/isbn/080213422X-M.jpg"
+      },
+      {
+        "author": "MacKinlayKantor",
+        "description": "The 1956 Pulitzer Prize-winning story of the Andersonville Fortress and its use as a concentration camp-like prison by the South during the Civil War.",
+        "genres": [
+          "HistoricalFiction",
+          "Fiction",
+          "CivilWar",
+          "War",
+          "Classics",
+          "AmericanCivilWar",
+          "Historical"
+        ],
+        "rating": "4.1",
+        "title": "Andersonville",
+        "url": "https://covers.openlibrary.org/b/isbn/0452269563-M.jpg"
+      },
+      {
+        "author": "NevilShute",
+        "description": "Nevil \"Shutes\" most beloved novel a tale of love and war follows its enterprising heroine from the Malayan jungle during World War II to the rugged Australian outback.Jean Paget a young Englishwoman living in Malaya is captured by the invading Japanese and forced on a brutal seven-month death march with dozens of other women and children. A few years after the war Jean is back in England the nightmare behind her. However an unexpected inheritance inspires her to return to Malaya to give something back to the villagers who saved her life. \"Jeans\" travels leads her to a desolate Australian outpost called Willstown where she finds a challenge that will draw on all the resourcefulness and spirit that carried her through her war-time ordeals.",
+        "genres": [
+          "Fiction",
+          "HistoricalFiction",
+          "Classics",
+          "Australia",
+          "Romance",
+          "War",
+          "Historical"
+        ],
+        "rating": "4.15",
+        "title": "A Town Like Alice",
+        "url": "https://covers.openlibrary.org/b/isbn/0345353749-M.jpg"
+      },
+      {
+        "author": "['W. Somerset Maugham']",
+        "description": "From a tormented orphan with a clubfoot Philip Carey grows into an impressionable young man with a voracious appetite for adventure and knowledge. His cravings take him to Paris at age eighteen to try his hand at art then back to London to study medicine. But even so nothing can sate his nagging hunger for experience. Then he falls obsessively in love embarking on a disastrous relationship that will change his life forever.…Marked by countless similarities to Maugham’s own life his masterpiece is “not an autobiography” as the author himself once contended “but an autobiographical novel; fact and fiction are inexorably mingled; the emotions are my own.”",
+        "genres": [
+          "Classics",
+          "Fiction",
+          "Literature",
+          "Novels",
+          "British Literature",
+          "Romance",
+          "Literary Fiction"
+        ],
+        "rating": "4.13",
+        "title": "Of Human Bondage",
+        "url": "https://covers.openlibrary.org/b/isbn/0140018611-M.jpg"
+      },
+      {
+        "author": "['Stephen King']",
+        "description": "Librarians Note: Alternate-cover edition for ISBN 0450031063Thousands of miles away from the small township of Salems Lot two terrified people a man and a boy still share the secrets of those clapboard houses and tree-lined streets. They must return to Salems Lot for a final confrontation with the unspeakable evil that lives on in the town.",
+        "genres": [
+          "Horror",
+          "Fiction",
+          "Vampires",
+          "Fantasy",
+          "Thriller",
+          "Paranormal",
+          "Supernatural"
+        ],
+        "rating": "4.05",
+        "title": "[\"'Salem's Lot\"]",
+        "url": "https://covers.openlibrary.org/b/isbn/0385007515-M.jpg"
+      },
+      {
+        "author": "['E. E. Cummings']",
+        "description": "E.E. Cummings is without question one of the major poets of the 20th century and this volume first published in 1959 is indispensable for every lover of modern lyrical verse. It contains one hundred of Cummings’s wittiest and most profound poems harvested from thirty-five of the most radically creative years in contemporary American poetry. These poems exhibit all the extraordinary lyricism playfulness technical ingenuity and compassion for which Cummings is famous. They demonstrate beautifully his extrapolations from traditional poetic structures and his departures from them as well as the unique synthesis of lavish imagery and acute artistic precision that has won him the adulation and respect of critics and poetry lovers everywhere.",
+        "genres": [
+          "Poetry",
+          "Classics",
+          "American",
+          "Fiction",
+          "Literature",
+          "20th Century",
+          "The United States Of America"
+        ],
+        "rating": "4.29",
+        "title": "100 Selected Poems",
+        "url": "https://covers.openlibrary.org/b/isbn/0394172191-M.jpg"
+      },
+      {
+        "author": "['Gavin Menzies']",
+        "description": "On 3/8/1421 the largest fleet the world had ever seen set sail from China. Its mission was \"to proceed all the way to the ends of the earth to collect tribute from the barbarians beyond the seas\" & unite the whole world in Confucian harmony. When it returned in 10/1423 the emperor had fallen leaving China in political & economic chaos. The great ships were left to rot at their moorings. Most records of their journeys were destroyed. Lost in Chinas long self-imposed isolation that followed was the knowledge that Chinese ships had reached America 70 years before Columbus & had circumnavigated the globe a century before Magellan. Also concealed was how the Chinese colonized America before the Europeans & transplanted in America & other countries the principal economic crops that have fed & clothed the world.Unveiling incontrovertible evidence of these astonishing voyages \"1421\" rewrites our understanding of history. Our knowledge of world exploration as its been commonly accepted for centuries must now be reconceived due to this landmark work of historical investigation.",
+        "genres": [
+          "History",
+          "Nonfiction",
+          "China",
+          "Historical",
+          "Asia",
+          "World History",
+          "Travel"
+        ],
+        "rating": "3.61",
+        "title": "1421: The Year China Discovered America",
+        "url": "https://covers.openlibrary.org/b/isbn/0060537639-M.jpg"
+      },
+      {
+        "author": "['David Nevin']",
+        "description": "The war of 1812 would either make America a global power sweeping all the way to the Pacific--or break it into small pieces bound to mighty England. It was a second revolution of sorts to prove to the British that America had to be taken seriously. The principal actors in this drama were James and Dolley Madison and Andrew and Rachel Jackson. Their courage and determination would shape Americas destiny.",
+        "genres": [
+          "Historical Fiction",
+          "Fiction",
+          "American History",
+          "War",
+          "Historical",
+          "American",
+          "Military Fiction"
+        ],
+        "rating": "3.96",
+        "title": "1812",
+        "url": "https://covers.openlibrary.org/b/isbn/0312855109-M.jpg"
+      }
+    ],
+    "reading_wishlist": [],
+    "ongoing": [],
+    "completed": []
+  }
+}

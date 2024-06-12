@@ -1,0 +1,20 @@
+<div class="book">
+    <a href="/book/<%= book.title %>"><img src=<%= book.url %> alt="Book Cover"></a>
+    <h3><%= (book.title.replace('["', '').replace('"]', '')).length > 28 ? `${(book.title.replace('["', '').replace('"]', '')).slice(0, 28)}...` : (book.title.replace('["', '').replace('"]', '')) %></h3>
+    <p>Author: <%= book.author.replace("['", "").replace("']", "") %></p>
+    <!-- <p>Rating: <%= book.rating %></p> -->
+    <div style="padding: 0; display: flex; gap: 20px; margin-bottom: 20px;">
+        <p style="margin: 0 !important">Rating: &nbsp;&nbsp;<%= book.rating %></p>
+        <div id="starRating">
+            <% for (let i = 0; i < Math.floor(Math.round(book.rating * 2) / 2); i++) { %>
+                <i class="fa-solid fa-star"></i>
+            <% } %>
+            <% if ((Math.round(book.rating * 2) / 2) % 1 !== 0) { %>
+                <i class="fa-solid fa-star-half-stroke"></i>
+            <% } %>
+            <% for (let i = 0; i < 5 - (Math.floor(Math.round(book.rating * 2) / 2)) - (((Math.round(book.rating * 2) / 2) % 1 !== 0) ? 1 : 0); i++) { %>
+                <i class="fa-regular fa-star"></i>
+            <% } %>
+        </div>
+    </div>
+</div>

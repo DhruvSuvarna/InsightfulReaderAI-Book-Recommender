@@ -1,0 +1,45 @@
+<div class="navbar">
+    <div class="logo"><img src="/images/logo-128.png" alt="logo" width="60"><h2>InsightfulReadsAI</h2></div>
+    <nav class="navbar-menu">
+        <ul>
+            <li><div class="toggle" onclick="switchTheme()"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></div></li>
+            <li><a id="home" href="/">Home</a></li>
+            <li><a id="reading" href="/reading-list">Reading List</a></li>
+            <li><a id="friends" href="/friends">Friends</a></li>
+            <li class="signup-le"><a id="signup" href="/signup">Signup</a></li>
+            <li class="login-le"><a id="login" href="/login">Login</a></li>
+            <li class="logout-le invisible">
+                <div class="dropdown">
+                    <div class="avatar"></div>
+                    <div class="dropdown-content" style="right: -20px;">
+                      <a href="/profile" id="profile">Profile</a>
+                      <a href="/logout">Logout</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="hamburger" id="ham-icon" onclick="toggleMenu()"><img id="ham-svg" src="/images/menu-svgrepo-com.svg" width="45"></div>
+</div>
+
+<div class="nav-space"></div>
+
+<nav class="navbar-menu2">
+    <ul>
+        <li class="logout-le invisible" style="margin-bottom: 10px;">
+            <div class="dropdown">
+                <div class="avatar"></div>
+                <div class="dropdown-content">
+                  <a href="/profile" id="profile">Profile</a>
+                  <a href="/logout">Logout</a>
+                </div>
+            </div>
+        </li>
+        <li class="extra-pd"><div class="toggle" onclick="switchTheme()"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></div></li>
+        <li class="extra-pd"><a id="home" href="/">Home</a></li>
+        <li class="extra-pd"><a id="reading" href="/reading-list">Reading List</a></li>
+        <li class="extra-pd"><a id="friends" href="/friends">Friends</a></li>
+        <li class="signup-le extra-pd"><a id="signup" href="/signup">Signup</a></li>
+        <li class="login-le extra-pd"><a id="login" href="/login">Login</a></li>
+    </ul>
+</nav>
