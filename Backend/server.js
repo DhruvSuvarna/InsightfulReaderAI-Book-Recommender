@@ -30,14 +30,44 @@ const friendSchema = new mongoose.Schema({
     username: String
 });
 
+const friendRequestSentSchema = new mongoose.Schema({
+    receiverName: String,
+    status: {
+        type: String,
+        enum: ['pending', 'accepted', 'rejected'],
+        default: 'pending'
+    },
+});
+
+const friendRequestReceivedSchema = new mongoose.Schema({
+    senderName: String,
+    status: {
+        type: String,
+        enum: ['pending', 'accepted', 'rejected'],
+        default: 'pending'
+    },
+});
+
+const notificationSchema = new mongoose.Schema({
+    message: String
+});
+
 const userSchema = new mongoose.Schema({
     username: {type:String, unique: true},
     email: {type:String, unique: true},
     password: String,
+    mode: {
+        type: String,
+        enum: ['light', 'dark'],
+        default: 'light'
+    },
     reading_wishlist: [bookSchema],
     ongoing: [bookSchema],
     completed: [bookSchema],
-    friends: [friendSchema]
+    friends: [friendSchema],
+    friendRequestSent: [friendRequestSentSchema],
+    friendRequestReceived: [friendRequestReceivedSchema],
+    notifications: [notificationSchema]
 });
 
 //Models
@@ -174,6 +204,8 @@ app.route("/login")
                 .then(data => {
                     data.isAuthenticated = "true";
                     data.username = req.body.username;
+                    data.notifications = foundUser.notifications;
+                    data.mode = foundUser.mode;
                     fetch('http://localhost:8000/states', {
                         method: 'PUT',
                         headers: {
@@ -199,6 +231,12 @@ app.get("/logout", requireAuth, (req, res)=>{
     fetch('http://localhost:8000/states')
     .then(response => response.json())
     .then(data => {
+        const username = data.username
+        User.findOne({username: username})
+        .then(user => {
+            user.mode = data.mode
+            user.save()
+        })
         data.isAuthenticated = "false";
         data.username = "null";
         fetch('http://localhost:8000/states', {
@@ -213,21 +251,38 @@ app.get("/logout", requireAuth, (req, res)=>{
     .catch(err=>console.log(err));
 });
 
+app.get("/notifications", requireAuth, (req, res)=>{
+    fetch('http://localhost:8000/states')
+    .then(response => response.json())
+    .then(data => {
+        User.findOne
+        ({ username: data.username })
+        .then(user => {
+            res.render("notifications", {notifications: user.notifications});
+        })
+        .catch(err => console.log(err));
+    });
+});
+
 app.get("/friends", requireAuth, (req, res)=>{
     fetch('http://localhost:8000/states')
     .then(response => response.json())
     .then(data=>{
         User.findOne({username: data.username})
         .then(user=>{
-            res.render('friends', {friends: user.friends});
+            const requests = {
+                received: user.friendRequestReceived,
+                sent: user.friendRequestSent
+            }
+            res.render('friends', {friends: user.friends, requests: requests});
         })
         .catch(err=>console.log(err))
     });
 });
 
-app.post("/friends", (req,  res)=>{
+app.post("/friends", requireAuth, (req,  res)=>{
     const friendUsername = req.body.username;
-    console.log("Step 1:",friendUsername)
+    //console.log("Step 1:",friendUsername)
     fetch('http://localhost:8000/states')
     .then(response => response.json())
     .then(data => {
@@ -235,8 +290,12 @@ app.post("/friends", (req,  res)=>{
         .then(user => {
             // console.log("Step2: Obviously you exist in users", user.username)
             // console.log("Step3: Your friends", user.friends)
+        const requests = {
+            received: user.friendRequestReceived,
+            sent: user.friendRequestSent
+        }
         if (friendUsername === user.username){
-            res.render("friends", {friends: user.friends, errmsg: "You can't add yourself as a friend!"});
+            res.render("friends", {friends: user.friends, errmsg: "You can't add yourself as a friend!", requests: requests});
             // console.log("adding yourself",friendUsername);
         } else {
             User.findOne({username: friendUsername})
@@ -247,43 +306,101 @@ app.post("/friends", (req,  res)=>{
                     const same = user.friends.filter(f => f.username === friendUsername)
                     if (same.length>0) {
                         // console.log("adding same friend again")
-                        res.render("friends", {friends: user.friends, errmsg: "Friend already added!"});
+                        res.render("friends", {friends: user.friends, errmsg: "Friend already added!", requests: requests});
                     } else {
-                        const newFriend = {
-                                username: req.body.username
+                        // send friendRequest
+                        const newFriendRequestSent = {
+                            receiverName: friendUsername,
+                            status: 'pending'
+                        }
+                        User.findOneAndUpdate(
+                            { username: user.username },
+                            { $push: { friendRequestSent: newFriendRequestSent } }, 
+                            { new: true } 
+                        )
+                        .then(() => {
+                            const newFriendRequestReceived = {
+                                senderName: user.username,
+                                status: 'pending'
+                            }
+                            const newNotification = {
+                                message: `${user.username} sent you a friend request!`
                             }
                             User.findOneAndUpdate(
-                                { username: data.username },
-                                { $push: { friends: newFriend } }, 
+                                { username: friendUsername },
+                                { $push: { 
+                                    friendRequestReceived: newFriendRequestReceived,
+                                    notifications: newNotification
+                                } }, 
                                 { new: true } 
                             )
                             .then(() => {
-                                User.findOne({username: data.username})
-                                .then(u=>{
-                                    res.render("friends", {friends: u.friends, success: `${friendUsername} has been added as friend`});
-                                });
+                                User.findOne({username: user.username})
+                                    .then(user=>{
+                                        const requests = {
+                                            received: user.friendRequestReceived,
+                                            sent: user.friendRequestSent
+                                        }
+                                        res.render("friends", {friends: user.friends, success: "Friend request sent!", requests: requests});
+                                    })
+                                    .catch(err => {
+                                        console.log("Error sending friend request:", err);
+                                    });
+                            })
+                            .catch(err => {
+                                console.log("Error sending friend request:", err);
+                            });
                         })
                         .catch(err => {
-                            console.log("Error adding friend:", err);
+                            console.log("Error sending friend request:", err);
                         });
                     }
                 } else {
-                    const newFriend = {
-                        username: req.body.username
+                    // send friendRequest
+                    const newFriendRequestSent = {
+                        receiverName: friendUsername,
+                        status: 'pending'
                     }
                     User.findOneAndUpdate(
-                        { username: data.username },
-                        { $push: { friends: newFriend } }, 
+                        { username: user.username },
+                        { $push: { friendRequestSent: newFriendRequestSent } }, 
                         { new: true } 
                     )
                     .then(() => {
-                        User.findOne({username: data.username})
-                        .then(u=>{
-                            res.render("friends", {friends: u.friends, success: `${friendUsername} has been added as friend`});
+                        const newFriendRequestReceived = {
+                            senderName: user.username,
+                            status: 'pending'
+                        }
+                        const newNotification = {
+                            message: `${user.username} sent you a friend request!`
+                        }
+                        User.findOneAndUpdate(
+                            { username: friendUsername },
+                            { $push: { 
+                                friendRequestReceived: newFriendRequestReceived,
+                                notifications: newNotification
+                            } }, 
+                            { new: true } 
+                        )
+                        .then(() => {
+                            User.findOne({username: user.username})
+                                .then(user=>{
+                                    const requests = {
+                                        received: user.friendRequestReceived,
+                                        sent: user.friendRequestSent
+                                    }
+                                    res.render("friends", {friends: user.friends, success: "Friend request sent!", requests: requests});
+                                })
+                                .catch(err => {
+                                    console.log("Error sending friend request:", err);
+                                });
+                        })
+                        .catch(err => {
+                            console.log("Error sending friend request:", err);
                         });
                     })
                     .catch(err => {
-                        console.log("Error adding friend:", err);
+                        console.log("Error sending friend request:", err);
                     });
                 }
             } else {
@@ -293,6 +410,83 @@ app.post("/friends", (req,  res)=>{
         }
       });
     });
+});
+
+app.post('/eval-friend-requests', requireAuth, (req, res)=>{
+    const senderName = req.body.senderName;
+    const status = req.body.status;
+    fetch('http://localhost:8000/states')
+    .then(response => response.json())
+        .then(data => {
+            User.findOne({ username: data.username })
+            .then(user=>{
+                if(status === "accept") {
+                    const newFriend = {
+                        username: senderName
+                    }
+                    User.findOneAndUpdate(
+                        { username: user.username },
+                        { $push: { friends: newFriend } }, 
+                        { new: true } 
+                    )
+                    .then(() => {
+                        User.findOneAndUpdate(
+                            { username: user.username },
+                            { $pull: { friendRequestReceived: {senderName: senderName} } }, 
+                            { new: true } 
+                        )
+                        .then(() => {
+                            User.findOneAndUpdate(
+                                { username: senderName },
+                                { $push: { friends: {username: user.username} } }, 
+                                { new: true } 
+                            )
+                            .then(() => {
+                                User.findOneAndUpdate(
+                                    { username: senderName },
+                                    { $pull: { friendRequestSent: {receiverName: user.username} } }, 
+                                    { new: true } 
+                                )
+                                .then(user => {
+                                    const userEdit = user;
+                                    userEdit.notifications.push({message: `${data.username} accepted your friend request!`});
+                                    userEdit.save()
+                                    res.redirect("/friends");
+                                })
+                                .catch(err => { console.log("Error accepting friend request:", err);});
+                            })
+                            .catch(err=>{ console.log("Error accepting friend request:", err);});
+                        })
+                        .catch(err => { console.log("Error accepting friend request:", err);});
+                    })
+                    .catch(err => { console.log("Error accepting friend request:", err);});
+                }
+                else if(status === "reject") {
+                    User.findOneAndUpdate(
+                        { username: data.username },
+                        { $pull: { friendRequestReceived: {senderName: senderName} } }, 
+                        { new: true } 
+                    )
+                    .then(() => {
+                        User.findOneAndUpdate(
+                            { username: senderName },
+                            { $pull: { friendRequestSent: {receiverName: data.username} } }, 
+                            { new: true } 
+                        )
+                        .then(user => {
+                            const userEdit = user;
+                            userEdit.notifications.push({message: `${data.username} rejected your friend request!`});
+                            userEdit.save()
+                            res.redirect("/friends");
+                        })
+                        .catch(err => { console.log("Error rejecting friend request:", err);});
+                    })
+                    .catch(err => { console.log("Error rejecting friend request:", err);});
+                }
+            })
+            .catch(err => { console.log("Error accepting friend request:", err);});
+        })
+        .catch(err => { console.log("Error accepting friend request:", err);});
 });
 
 app.post('/add-book-to-reading-wishlist', (req, res)=>{
@@ -508,6 +702,37 @@ app.get("/friend/:username", (req, res)=>{
                 res.redirect("/error");
             }
         });
+    });
+});
+
+app.post('/deleteNotification', (req, res)=>{
+    const notificationID = req.body.notificationId;
+    fetch('http://localhost:8000/states')
+    .then(response => response.json())
+    .then(data => {
+        User.findOneAndUpdate(
+            { username: data.username },
+            { $pull: { notifications: { _id: notificationID } } }, 
+            { new: true } 
+        )
+        .then(() => {
+            data.notifications = data.notifications.filter(X=> X._id !== notificationID)
+            fetch('http://localhost:8000/states', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(()=> res.redirect("/notifications"))
+            .catch(err => {console.log("Error deleting notification:", err)});
+        })
+        .catch(err => {
+            console.log("Error deleting notification:", err);
+        });
+    })
+    .catch(err => {
+        console.log("Error deleting notification:", err);
     });
 });
 

@@ -26,7 +26,8 @@ fetch('http://localhost:8000/states')
             document.querySelectorAll('.login-le').forEach(Element=>Element.classList.add("invisible"));
             document.querySelectorAll('.logout-le').forEach(Element=>Element.classList.remove("invisible"));
             let username = data.username;
-            document.querySelectorAll('.avatar').forEach(Element=> Element.innerHTML = username[0].toUpperCase());
+            const avatarInnerHTML = data.notifications.length !== 0? `<span class="badge">${data.notifications.length}</span>${username[0].toUpperCase()}`: `${username[0].toUpperCase()}`;
+            document.querySelectorAll('.avatar').forEach(Element=> Element.innerHTML = avatarInnerHTML);
             document.querySelectorAll('#profile').forEach(Element => {Element.setAttribute('href', `/profile/${username}`);});
             
         } else {

@@ -1,0 +1,5 @@
+<div class="request-details">
+    <div class="request-avatar"><%= req.receiverName[0].toUpperCase() %></div>
+    <a href="/friend/<%= req.receiverName %>"><h3><%= req.receiverName %></h3></a>
+    <div class="status" style="display: block">Status: <span class="pending"><%= req.status %></span></div>
+</div>

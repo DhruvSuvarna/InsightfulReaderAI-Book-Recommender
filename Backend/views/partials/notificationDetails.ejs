@@ -1,0 +1,11 @@
+<p class="message">
+    <% if (notification.message.includes("sent")){ %>
+        <a class="sent" href="/friends"><%= notification.message %></a>
+    <% } else { %>
+        <%= notification.message %>
+    <% } %>
+</p>
+<form action="/deleteNotification" method="POST" style="margin:0;">
+    <input type="hidden" name="notificationId" value="<%= notification._id %>">
+    <button class="delete" type="submit" style="margin:0;"><i class="fa-solid fa-x"></i></button>
+</form>

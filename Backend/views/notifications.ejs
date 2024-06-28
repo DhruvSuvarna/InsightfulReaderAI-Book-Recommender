@@ -1,0 +1,27 @@
+<%- include('./partials/header') -%>
+<div class="background"></div>
+<main>
+<%- include('./partials/navbar') -%>
+
+<!-- Begin Page Content -->
+    <div class="notification-container">
+        <div style="width: 50%;">
+            <h2 class="notification-list">Notifications</h2>
+            <% if ( notifications.length !== 0 ) { %>
+            <div class="notification-list-details">
+                <% notifications.slice().reverse().forEach((notification, index)=>{ %> 
+                    <div style="margin-bottom: 5px;">
+                        <div class="notification-div">
+                            <%- include('./partials/notificationDetails', {notification: notification})  -%>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+            <% } else { %>
+                <h2 class="normal">You haven't received any notifications</h2>
+            <% } %>
+        </div>
+    </div>
+
+</main>
+<%- include('./partials/footer') -%> 

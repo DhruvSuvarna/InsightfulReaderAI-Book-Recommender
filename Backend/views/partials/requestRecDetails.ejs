@@ -1,0 +1,16 @@
+<div class="request-details">
+    <div class="request-avatar"><%= req.senderName[0].toUpperCase() %></div>
+    <a href="/friend/<%= req.senderName %>"><h3><%= req.senderName %></h3></a>
+    <div class="status">
+        <form action="/eval-friend-requests" method="POST">
+            <input type="hidden" name="senderName" value="<%= req.senderName %>">
+            <input type="hidden" name="status" value="accept">
+            <button type="submit" id="accept">accept</button>
+        </form>
+        <form action="/eval-friend-requests" method="POST">
+            <input type="hidden" name="senderName" value="<%= req.senderName %>">
+            <input type="hidden" name="status" value="reject">
+            <button type="submit" id="reject">reject</button>
+        </form>
+    </div>
+</div>

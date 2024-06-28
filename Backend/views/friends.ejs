@@ -19,9 +19,58 @@
         </form>
     </div>
 
+    <% if ( requests.received.length !== 0 ) { %>
+    <div class="friends-container">
+        <div>
+            <h2 class="friends-list">Requests Received</h2>
+            <div class="friends-list-details">
+                <% requests.received.forEach((req, index)=>{ %> 
+                    <div style="margin-bottom: 5px;">
+                        <div class="details-div">
+                            <div class="friend-number">
+                                <div 
+                                class="number-avatar"
+                                >
+                                    <%= index + 1 %>
+                                </div>
+                            </div>
+                            <%- include('./partials/requestRecDetails', {req: req})  -%>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+    <% if ( requests.sent.length !== 0 ) { %>
+    <div class="friends-container">
+        <div>
+            <h2 class="friends-list">Requests Sent</h2>
+            <div class="friends-list-details">
+                <% requests.sent.forEach((req, index)=>{ %> 
+                    <div style="margin-bottom: 5px;">
+                        <div class="details-div">
+                            <div class="friend-number">
+                                <div 
+                                class="number-avatar"
+                                >
+                                    <%= index + 1 %>
+                                </div>
+                            </div>
+                            <%- include('./partials/requestSentDetails', {req: req})  -%>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
     <div class="friends-container">
         <div>
             <h2 class="friends-list">Your Friends List</h2>
+            <% if ( friends.length !== 0 ) { %>
             <div class="friends-list-details">
                 <% friends.forEach((friend, index)=>{ %> 
                     <div style="margin-bottom: 5px;">
@@ -38,8 +87,12 @@
                     </div>
                 <% }) %>
             </div>
+            <% } else { %>
+                <p>You have no friends yet.</p>
+            <% } %>
         </div>
     </div>
+
 
 
 

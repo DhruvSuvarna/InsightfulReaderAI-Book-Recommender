@@ -1,8 +1,9 @@
 {
   "states": {
     "mode": "dark",
-    "isAuthenticated": "false",
-    "username": "null",
+    "isAuthenticated": "true",
+    "username": "rajat",
+    "notifications": [],
     "test_list": [
       {
         "author": "J.G.Ballard",
